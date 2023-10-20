@@ -101,7 +101,7 @@ Sample output for the application
 ![RAG with Youtube](images/RAG_Youtube.png)
 
 4. Using PPT as Source
-![RAG with PPt](images/RAG_PPT.png)
+![RAG with PPT](images/RAG_PPT.png)
 
 ### Security
 
