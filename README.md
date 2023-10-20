@@ -92,16 +92,16 @@ streamlit run Home.py
 Sample output for the application
 
 1. Using PDFs as source
-![Architecture Diagram](images/RAG_Pdfs.png)
+![RAG with PDFs](images/RAG_Pdfs.png)
 
 2. Using Amazon S3 as source
-![Architecture Diagram](images/RAG_S3.png)
+![RAG with Amazon S3](images/RAG_S3.png)
 
 3. Using Youtube as source
-![Architecture Diagram](images/RAG_Youtube.png)
+![RAG with Youtube](images/RAG_Youtube.png)
 
 4. Using PPT as Source
-![Architecture Diagram](images/RAG_PPT.png)
+![RAG with PPt](images/RAG_PPT.png)
 
 ### Security
 
