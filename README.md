@@ -87,7 +87,7 @@ model_id -> The Bedrock Model which you will be using
 streamlit run Home.py
 ```
 
-## Output
+### Output
 
 Sample output for the application
 
@@ -103,11 +103,11 @@ Sample output for the application
 4. Using PPT as Source
 ![Architecture Diagram](images/RAG_PPT.png)
 
-## Security
+### Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-## License
+### License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
 
