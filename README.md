@@ -1,4 +1,4 @@
-## Build a semantic search application leveraging pgvector for Aurora PostgreSQL and Amazon Bedrock
+## Build a Semantic Search Application leveraging pgvector for Aurora PostgreSQL and Amazon Bedrock
 
 ### Use Case
 
