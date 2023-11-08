@@ -11,7 +11,6 @@ from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.document_loaders import YoutubeLoader
 from langchain.document_loaders import UnstructuredPowerPointLoader
 from langchain.document_loaders import Docx2txtLoader
-from langchain.memory import PostgresChatMessageHistory
 import os
 import boto3
 from botocore.exceptions import ClientError
@@ -80,11 +79,7 @@ def get_vectorstore(text_chunks):
 
 def get_conversation_chain(vectorstore):
     llm = Bedrock(model_id="anthropic.claude-instant-v1",region_name="us-west-2")
-    secret = json.loads(get_secret())
-    message_history = PostgresChatMessageHistory(
-    connection_string="postgresql://"+secret["username"]+":"+secret["password"]+"@"+secret["host"]+"/genai",
-    session_id=generate_session_id())
-    memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=message_history, return_source_documents=True, return_messages=True)
+    memory = ConversationBufferMemory(memory_key="chat_history", return_source_documents=True, return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=vectorstore.as_retriever(),
@@ -133,13 +128,13 @@ def main():
     elif selected_source=='S3 (txt)':
         s3_client = boto3.client('s3')
         # the objects are stored in aurora-genai bucket. Enter the appropriate bucket name
-        response = s3_client.list_objects_v2(Bucket='aurora-genai', Prefix='documentEmbeddings/')
+        response = s3_client.list_objects_v2(Bucket='s3-bucket-name', Prefix='documentEmbeddings/')
         document_keys = [obj['Key'].split('/')[1] for obj in response['Contents']][1:]
         user_input = st.selectbox("Select an S3 document and click on 'Process'", document_keys)
         if st.button("Process"):
             with st.spinner("Processing"):
                 prefix="documentEmbeddings/"+user_input
-                loader = S3FileLoader("aurora-genai", prefix)
+                loader = S3FileLoader("s3-bucket-name", prefix)
                 docs = loader.load()
                 for i in docs:
                     text_chunks = get_text_chunks(i.page_content)
