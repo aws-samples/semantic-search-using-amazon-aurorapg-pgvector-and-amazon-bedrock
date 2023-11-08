@@ -11,12 +11,10 @@ from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.document_loaders import YoutubeLoader
 from langchain.document_loaders import UnstructuredPowerPointLoader
 from langchain.document_loaders import Docx2txtLoader
-import os
 import boto3
 from botocore.exceptions import ClientError
 import tempfile
 import time
-import random
 import hashlib
 import json
 import secrets
