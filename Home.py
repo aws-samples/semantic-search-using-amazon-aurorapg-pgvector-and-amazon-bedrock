@@ -149,7 +149,7 @@ def main():
                 st.session_state.conversation = get_conversation_chain(
                     vectorstore)
     elif selected_source=='PPT':
-        ppt_docs = st.file_uploader("Upload your CSV here and click on 'Process'", type=['ppt', 'pptx'], accept_multiple_files=False)
+        ppt_docs = st.file_uploader("Upload your PPT here and click on 'Process'", type=['ppt', 'pptx'], accept_multiple_files=False)
         if st.button("Process"):
             with st.spinner("Processing"):
                 with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
