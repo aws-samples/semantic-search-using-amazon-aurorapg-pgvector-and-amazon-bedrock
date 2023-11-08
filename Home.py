@@ -7,7 +7,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.llms.bedrock import Bedrock
 from langchain.embeddings import BedrockEmbeddings
 from langchain.document_loaders import S3FileLoader
-from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.document_loaders import YoutubeLoader
 from langchain.document_loaders import UnstructuredPowerPointLoader
 from langchain.document_loaders import Docx2txtLoader
@@ -137,23 +136,7 @@ def main():
                 for i in docs:
                     text_chunks = get_text_chunks(i.page_content)
                     vectorstore = get_vectorstore(text_chunks)
-                st.session_state.conversation = get_conversation_chain(vectorstore) 
-    elif selected_source=='CSV':
-        csv_docs = st.file_uploader(
-            "Upload your CSV here and click on 'Process'", type="csv", accept_multiple_files=False)
-        if st.button("Process"):
-            with st.spinner("Processing"):
-                with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                    tmp_file.write(csv_docs.getvalue())
-                    tmp_file_path = tmp_file.name
-                loader = CSVLoader(file_path=tmp_file_path, encoding="utf-8", csv_args={
-                            'delimiter': ','})
-                docs = loader.load()
-                for i in docs:
-                    text_chunks = get_text_chunks(i.page_content)
-                    vectorstore = get_vectorstore(text_chunks)
-                st.session_state.conversation = get_conversation_chain(
-                        vectorstore)   
+                st.session_state.conversation = get_conversation_chain(vectorstore)  
     elif selected_source=='Youtube':
         user_input = st.text_input("Enter an youtube link and click on 'Process'")
         if st.button("Process"):
