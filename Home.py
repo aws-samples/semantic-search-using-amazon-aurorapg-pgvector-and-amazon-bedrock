@@ -75,7 +75,7 @@ def get_vectorstore(text_chunks):
 
 
 def get_conversation_chain(vectorstore):
-    llm = Bedrock(model_id="anthropic.claude-instant-v1",region_name="us-west-2")
+    llm = Bedrock(model_id="anthropic.claude-v2:1",region_name="us-west-2")
     memory = ConversationBufferMemory(memory_key="chat_history", return_source_documents=True, return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
